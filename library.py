@@ -156,6 +156,7 @@ VALUES (?, ?, ?, ?)
 """, borrowings)
 
 # Закрытие соединения
+connection.commit()
 connection.close()
 
 

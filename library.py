@@ -50,8 +50,8 @@ CREATE TABLE borrowings (
 # INSERT INTO таблица (поля)
 # VALUES (значения);
 cursor.execute("""
-INSERT INTO books (title, author, country, year)
-VALUES ("Азазель", "Борис Акунин", "Россия", 2000)
+INSERT INTO books (title, author, country,genre, year)
+VALUES ("Азазель", "Борис Акунин", "Россия", "Детектив", 2000)
 """)
 
 
@@ -63,8 +63,7 @@ user_age = int(input())
 
 cursor.execute("""
 INSERT INTO users (name, age) VALUES (?, ?)
-""", user_name, user_age)
-
+""", (user_name, user_age))
 
 # 2.3 Через случайные комбинации
 users_array = [
@@ -76,7 +75,7 @@ users_array = [
     ("Миша", 17), ("Алина", 15), ("Влад", 16), ("Егор", 17), ("Марина", 15)
 ]
 
-cursor.execute("""
+cursor.executemany("""
 INSERT INTO users (name, age) VALUES (?, ?)
 """, users_array)
 
@@ -118,7 +117,46 @@ INSERT INTO books (title, author, country, genre, year)
 VALUES (?, ?, ?, ?, ?)
 """, books)
 
+borrowings = [
+    (1, 1, "2026-04-01", None),
+    (2, 2, "2026-04-02", "2026-04-10"),
+    (3, 3, "2026-04-03", None),
+    (4, 4, "2026-04-04", "2026-04-12"),
+    (5, 5, "2026-04-05", None),
+    (6, 6, "2026-04-06", None),
+    (7, 7, "2026-04-07", "2026-04-15"),
+    (8, 8, "2026-04-08", None),
+    (9, 9, "2026-04-09", "2026-04-18"),
+    (10, 10, "2026-04-10", None),
+    (11, 11, "2026-04-11", None),
+    (12, 12, "2026-04-12", "2026-04-20"),
+    (13, 13, "2026-04-13", None),
+    (14, 14, "2026-04-14", None),
+    (15, 15, "2026-04-15", "2026-04-22"),
+    (16, 16, "2026-04-16", None),
+    (17, 17, "2026-04-17", None),
+    (18, 18, "2026-04-18", "2026-04-25"),
+    (19, 19, "2026-04-19", None),
+    (20, 20, "2026-04-20", None),
+    (21, 21, "2026-04-21", "2026-04-28"),
+    (22, 22, "2026-04-22", None),
+    (23, 23, "2026-04-23", None),
+    (24, 24, "2026-04-24", "2026-04-30"),
+    (25, 25, "2026-04-25", None),
+    (26, 26, "2026-04-26", None),
+    (27, 27, "2026-04-27", "2026-05-03"),
+    (28, 28, "2026-04-28", None),
+    (29, 29, "2026-04-29", None),
+    (30, 30, "2026-04-30", "2026-05-05")
+]
 
+cursor.executemany("""
+INSERT INTO borrowings (user_id, book_id, date_borrowed, date_returned)
+VALUES (?, ?, ?, ?)
+""", borrowings)
+
+# Закрытие соединения
+connection.close()
 
 
 

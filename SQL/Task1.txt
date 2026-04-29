@@ -1,0 +1,4 @@
+--SELECT * FROM books
+--SELECT id, name FROM users
+--SELECT * FROM books WHERE genre = 'Детектив' AND year > 1900
+--SELECT name, age FROM users WHERE age >= 15
